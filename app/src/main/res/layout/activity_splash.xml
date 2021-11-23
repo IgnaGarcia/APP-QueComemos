@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/turquoise_dark"
+    tools:context=".ui.splash.SplashActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="QueComemos?"
+        android:textFontWeight="600"
+        android:fontFamily="@font/biryani_extrabold"
+        android:textSize="@dimen/heading_xl"
+        android:textColor="@color/red"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
