@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="toolbar">75dp</dimen>
+
+    <dimen name="icon">27dp</dimen>
+
+    <dimen name="radius_sm">14dp</dimen>
+    <dimen name="radius">18dp</dimen>
+
+    <dimen name="button_h">65dp</dimen>
+    <dimen name="button_h_sm">50dp</dimen>
+    <dimen name="input_h">55dp</dimen>
+
+    <dimen name="heading_xl">33sp</dimen>
+    <dimen name="heading_lg">28sp</dimen>
+    <dimen name="heading_md">22sp</dimen>
+    <dimen name="text_lg">18sp</dimen>
+    <dimen name="text_md">16sp</dimen>
+    <dimen name="text_sm">13sp</dimen>
+    <dimen name="letterSpacing">.05</dimen>
+
+    <dimen name="space_xs">5dp</dimen>
+    <dimen name="space_sm">10dp</dimen>
+    <dimen name="space_md">15dp</dimen>
+    <dimen name="space_lg">20dp</dimen>
+    <dimen name="space_xl">25dp</dimen>
+    <dimen name="space_xxl">35dp</dimen>
+    <dimen name="space_3xl">50dp</dimen>
+</resources>

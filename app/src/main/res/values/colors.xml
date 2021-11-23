@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="turquoise_ligth">#cbf6f0</color>
+    <color name="turquoise">#188c7c</color>
+    <color name="turquoise_dark">#12695d</color>
+
+    <color name="red_ligth">#f1d0d6</color>
+    <color name="red">#c33c54</color>
+    <color name="red_dark">#ac354b</color>
+
+    <color name="white_ligth">#ffffff</color>
+    <color name="white">#fafafa</color>
+    <color name="white_dark">#7c7c7c</color>
+
+    <color name="black_ligth">#232323</color>
+    <color name="black">#151515</color>
+    <color name="black_dark">#000000</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="black_transparent_soft">#45000000</color>
+    <color name="black_transparent">#88000000</color>
+</resources>
