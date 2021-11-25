@@ -1,6 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.main.foodSelection.FoodSelectionFragment">
+
+    <TextView
+        android:id="@+id/tvSelection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/labelTodaySelection"
+        android:textSize="@dimen/heading_md"
+        android:layout_marginHorizontal="@dimen/space_md"
+        android:layout_marginTop="@dimen/space_xxl"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/llButtons"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_h"
+        android:layout_margin="@dimen/space_md"
+        app:layout_constraintTop_toBottomOf="@id/tvSelection"
+        app:layout_constraintBottom_toTopOf="@id/nsvList"
+        android:weightSum="3">
+        <Button
+            android:id="@+id/btnVote"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/labelVote"
+            app:layout_constraintRight_toLeftOf="@id/btnReroll"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <Button
+            android:id="@+id/btnReroll"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/turquoise"
+            android:text="@string/labelRegenerate"
+            app:layout_constraintLeft_toRightOf="@id/btnVote"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsvList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/llButtons"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_food"
+            android:requiresFadingEdge="vertical"
+            android:overScrollMode="always"
+            android:fadingEdgeLength="120dp"/>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

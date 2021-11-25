@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">QueComemos</string>
+    <string name="labelQueComemos">¿Que Comemos?</string>
+
     <string name="itemHome">Inicio</string>
     <string name="itemFoods">Platos</string>
     <string name="itemNewFood">Nuevo Plato</string>
+    <string name="labelTodaySelection">La seleccion para hoy es...</string>
+    <string name="labelRegenerate">Regenerar</string>
+    <string name="labelVote">Ir a Votar</string>
 </resources>
