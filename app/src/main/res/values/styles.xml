@@ -21,7 +21,7 @@
     </style>
 
     <style name="QueComemos.BottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="android:background">@color/white</item>
+        <item name="android:background">@color/black_dark</item>
         <item name="itemTextAppearanceActive">@style/QueComemos.BottomNavigation.Text.Active</item>
         <item name="labelVisibilityMode">labeled</item>
     </style>
