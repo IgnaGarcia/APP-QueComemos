@@ -8,4 +8,5 @@
     <string name="labelTodaySelection">La seleccion para hoy es...</string>
     <string name="labelRegenerate">Regenerar</string>
     <string name="labelVote">Ir a Votar</string>
+    <string name="labelSend">Enviar</string>
 </resources>

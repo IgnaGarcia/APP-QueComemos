@@ -1,6 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.main.newFood.NewFoodFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Crear un nuevo Plato"
+            android:textSize="@dimen/heading_md"
+            android:layout_marginHorizontal="@dimen/space_md"
+            android:layout_marginTop="@dimen/space_xxl"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre del Plato"
+            android:textSize="@dimen/space_md"
+            android:layout_marginTop="@dimen/space_3xl"
+            android:layout_marginHorizontal="@dimen/space_md"/>
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/input_h"
+            android:background="@drawable/shape_input"
+            android:imeOptions="actionNext"
+            android:paddingHorizontal="@dimen/space_md"
+            android:layout_marginTop="@dimen/space_sm"
+            android:layout_marginHorizontal="@dimen/space_md"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tipo del Plato"
+            android:textSize="@dimen/space_md"
+            android:layout_marginTop="@dimen/space_xl"
+            android:layout_marginHorizontal="@dimen/space_md"/>
+        <Spinner
+            android:id="@+id/spinnerType"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/input_h"
+            android:background="@drawable/shape_input"
+            android:paddingHorizontal="@dimen/space_md"
+            android:layout_marginTop="@dimen/space_sm"
+            android:layout_marginHorizontal="@dimen/space_md"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dieta del Plato"
+            android:textSize="@dimen/space_md"
+            android:layout_marginTop="@dimen/space_xl"
+            android:layout_marginHorizontal="@dimen/space_md"/>
+        <Spinner
+            android:id="@+id/spinnerDiet"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/input_h"
+            android:background="@drawable/shape_input"
+            android:paddingHorizontal="@dimen/space_md"
+            android:layout_marginTop="@dimen/space_sm"
+            android:layout_marginHorizontal="@dimen/space_md"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xl"
+            android:layout_marginHorizontal="@dimen/space_md"
+            android:gravity="center">
+            <CheckBox
+                android:id="@+id/cbHot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Es un plato caliente?"
+                android:textSize="@dimen/space_md"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSend"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_h"
+            android:layout_marginTop="@dimen/space_xl"
+            android:layout_marginHorizontal="@dimen/space_md"
+            android:text="@string/labelSend"/>
+    </LinearLayout>
+</ScrollView>

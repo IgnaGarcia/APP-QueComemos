@@ -24,6 +24,23 @@ class NewFoodFragment : Fragment(R.layout.fragment_new_food) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentNewFoodBinding.bind(view)
+
+        binding.btnSend.setOnClickListener {
+            validInputs()
+        }
+    }
+
+    fun validInputs() {
+        binding.etName
+        binding.spinnerType
+        binding.spinnerDiet
+        binding.cbHot
+
+        sendRequest()
+    }
+
+    fun sendRequest() {
+
     }
 
     override fun onDestroy() {
