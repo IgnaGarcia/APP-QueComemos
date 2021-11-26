@@ -8,7 +8,7 @@ import com.ignagr.quecomemos.R
 import com.ignagr.quecomemos.databinding.ItemFoodBinding
 import com.ignagr.quecomemos.entities.Food
 
-class FoodAdapter(var foodList : List<Food>, val voting: Boolean = false) :
+class FoodAdapter(var foodList : List<Food>, val voting: Boolean = false, val result: Boolean = false) :
     RecyclerView.Adapter<FoodAdapter.BaseViewHolder>(){
 
     inner class BaseViewHolder(view : View) : RecyclerView.ViewHolder(view) {
@@ -20,6 +20,9 @@ class FoodAdapter(var foodList : List<Food>, val voting: Boolean = false) :
 
             if(voting){
                 binding.checkSelected.visibility = View.VISIBLE
+            } else if (result){
+                binding.tvVotes.text = "5 Votos"
+                binding.tvVotes.visibility = View.VISIBLE
             }
         }
     }

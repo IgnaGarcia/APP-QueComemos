@@ -5,8 +5,13 @@
     <string name="itemHome">Inicio</string>
     <string name="itemFoods">Platos</string>
     <string name="itemNewFood">Nuevo Plato</string>
-    <string name="labelTodaySelection">La seleccion para hoy es...</string>
+
+    <string name="labelTodaySelection">La seleccion para hoy es…</string>
     <string name="labelRegenerate">Regenerar</string>
-    <string name="labelVote">Ir a Votar</string>
+    <string name="labelGoToVote">Ir a Votar</string>
+    <string name="labelVote">Votar</string>
     <string name="labelSend">Enviar</string>
+    <string name="labelResults">Los resultados son:</string>
+    <string name="labelGoToHome">Ir al inicio</string>
+    <string name="labelFinishVote">Terminar</string>
 </resources>
