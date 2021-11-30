@@ -31,7 +31,7 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentResultBinding.bind(view)
 
-        val food = Food("Milanesa con Pure", "Plato Principal", true, "")
+        val food = Food("Milanesa con Pure", "", listOf(""), true)
         chargeFoodList(listOf(food, food, food, food, food, food, food))
 
         binding.btnGoToHome.setOnClickListener {

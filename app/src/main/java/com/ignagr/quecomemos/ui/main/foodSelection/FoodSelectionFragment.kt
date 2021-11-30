@@ -1,14 +1,17 @@
 package com.ignagr.quecomemos.ui.main.foodSelection
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ignagr.quecomemos.R
 import com.ignagr.quecomemos.databinding.FragmentFoodSelectionBinding
 import com.ignagr.quecomemos.entities.Food
+import com.ignagr.quecomemos.remote.FirestoreClient
 import com.ignagr.quecomemos.util.IntentManager
 
 class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
@@ -30,14 +33,29 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentFoodSelectionBinding.bind(view)
 
-        val food = Food("Milanesa con Pure", "Plato Principal", true, "")
-        chargeFoodList(listOf(food, food, food, food, food, food, food))
+
+        getFoodList()
 
         binding.btnVote.setOnClickListener {
             IntentManager(requireActivity()).goToVote()
         }
         binding.btnReroll.setOnClickListener {
 
+        }
+    }
+
+    private fun getFoodList(){
+        FirestoreClient().getFoodList().addOnCompleteListener {
+            if(it.isSuccessful){
+                val foodList = mutableListOf<Food>()
+                for(item in it.result!!.documents){
+                    val food = item.toObject(Food::class.java)
+                    food?.let { foodList.add(food) }
+                }
+                chargeFoodList(foodList)
+            } else if(it.isCanceled){
+                Log.e(it.exception!!.message, it.exception.toString())
+            }
         }
     }
 

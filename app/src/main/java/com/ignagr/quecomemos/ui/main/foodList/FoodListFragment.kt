@@ -1,6 +1,7 @@
 package com.ignagr.quecomemos.ui.main.foodList
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ignagr.quecomemos.R
 import com.ignagr.quecomemos.databinding.FragmentFoodListBinding
 import com.ignagr.quecomemos.entities.Food
+import com.ignagr.quecomemos.remote.FirestoreClient
 import com.ignagr.quecomemos.ui.main.foodSelection.FoodAdapter
 
 class FoodListFragment : Fragment(R.layout.fragment_food_list) {
@@ -30,9 +32,23 @@ class FoodListFragment : Fragment(R.layout.fragment_food_list) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentFoodListBinding.bind(view)
 
-        val food = Food("Milanesa con Pure", "Plato Principal", true, "")
-        chargeFoodList(listOf(food, food, food, food, food, food, food))
+        getFoodList()
+    }
 
+
+    private fun getFoodList(){
+        FirestoreClient().getFoodList().addOnCompleteListener {
+            if(it.isSuccessful){
+                val foodList = mutableListOf<Food>()
+                for(item in it.result!!.documents){
+                    val food = item.toObject(Food::class.java)
+                    food?.let { foodList.add(food) }
+                }
+                chargeFoodList(foodList)
+            } else if(it.isCanceled){
+                Log.e(it.exception!!.message, it.exception.toString())
+            }
+        }
     }
 
     private fun chargeFoodList(mapTravelList: List<Food>) {

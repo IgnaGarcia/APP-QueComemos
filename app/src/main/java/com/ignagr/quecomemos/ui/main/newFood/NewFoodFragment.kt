@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ignagr.quecomemos.R
 import com.ignagr.quecomemos.databinding.FragmentNewFoodBinding
+import com.ignagr.quecomemos.entities.Food
+import com.ignagr.quecomemos.remote.FirestoreClient
 
 class NewFoodFragment : Fragment(R.layout.fragment_new_food) {
     private var _binding: FragmentNewFoodBinding? = null
@@ -26,21 +28,22 @@ class NewFoodFragment : Fragment(R.layout.fragment_new_food) {
         _binding = FragmentNewFoodBinding.bind(view)
 
         binding.btnSend.setOnClickListener {
-            validInputs()
+            if(validInputs()) sendRequest()
         }
     }
 
-    fun validInputs() {
+    private fun validInputs() : Boolean {
         binding.etName
         binding.spinnerType
         binding.spinnerDiet
         binding.cbHot
 
-        sendRequest()
+        return true
     }
 
-    fun sendRequest() {
-
+    private fun sendRequest(){
+        val food = Food(binding.etName.toString(), "", listOf(""), true)
+        FirestoreClient().saveFood(food)
     }
 
     override fun onDestroy() {

@@ -32,7 +32,7 @@ class ElectFragment : Fragment(R.layout.fragment_elect) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentElectBinding.bind(view)
 
-        val food = Food("Milanesa con Pure", "Plato Principal", true, "")
+        val food = Food("Milanesa con Pure", "", listOf(""), true)
         chargeFoodList(listOf(food, food, food, food, food, food, food))
 
         binding.btnContinue.setOnClickListener {

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="food_types">
+        <item>Principal</item>
+        <item>Postre</item>
+        <item>Entrada</item>
+        <item>Desayuno/Merienda</item>
+        <item>Snack</item>
+    </string-array>
+
+    <string-array name="food_diet">
+        <item>Omnivoro</item>
+        <item>Vegetariano</item>
+        <item>Vegano</item>
+        <item>Libre de Gluten</item>
+    </string-array>
+</resources>
