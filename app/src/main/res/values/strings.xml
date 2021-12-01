@@ -14,4 +14,9 @@
     <string name="labelResults">Los resultados son:</string>
     <string name="labelGoToHome">Ir al inicio</string>
     <string name="labelFinishVote">Terminar</string>
+    <string name="foodDiets">Dietas del Plato</string>
+    <string name="foodType">Tipo del Plato</string>
+    <string name="createFood">Crear un nuevo Plato</string>
+    <string name="foodName">Nombre del Plato</string>
+    <string name="isHotFood">Es un plato caliente?</string>
 </resources>

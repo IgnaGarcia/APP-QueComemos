@@ -29,4 +29,9 @@
     <style name="QueComemos.BottomNavigation.Text.Active" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textColor">@color/red</item>
     </style>
+
+    <style name="QueComemos.Spinner" parent="android:Widget.Spinner">
+        <item name="android:background">@drawable/spinner_background</item>
+        <item name="android:popupBackground">@color/black_ligth</item>
+    </style>
 </resources>

@@ -8,14 +8,14 @@
     tools:context=".ui.main.newFood.NewFoodFragment">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Crear un nuevo Plato"
+            android:text="@string/createFood"
             android:textSize="@dimen/heading_md"
             android:layout_marginHorizontal="@dimen/space_md"
             android:layout_marginTop="@dimen/space_xxl"/>
@@ -23,7 +23,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre del Plato"
+            android:text="@string/foodName"
             android:textSize="@dimen/space_md"
             android:layout_marginTop="@dimen/space_3xl"
             android:layout_marginHorizontal="@dimen/space_md"/>
@@ -32,6 +32,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/input_h"
             android:background="@drawable/shape_input"
+            android:inputType="text"
+            android:maxLines="1"
             android:imeOptions="actionNext"
             android:paddingHorizontal="@dimen/space_md"
             android:layout_marginTop="@dimen/space_sm"
@@ -40,7 +42,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tipo del Plato"
+            android:text="@string/foodType"
             android:textSize="@dimen/space_md"
             android:layout_marginTop="@dimen/space_xl"
             android:layout_marginHorizontal="@dimen/space_md"/>
@@ -48,7 +50,7 @@
             android:id="@+id/spinnerType"
             android:layout_width="match_parent"
             android:layout_height="@dimen/input_h"
-            android:background="@drawable/shape_input"
+            android:background="@drawable/spinner_background"
             android:paddingHorizontal="@dimen/space_md"
             android:layout_marginTop="@dimen/space_sm"
             android:layout_marginHorizontal="@dimen/space_md"/>
@@ -56,15 +58,21 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dieta del Plato"
+            android:text="@string/foodDiets"
             android:textSize="@dimen/space_md"
             android:layout_marginTop="@dimen/space_xl"
             android:layout_marginHorizontal="@dimen/space_md"/>
-        <Spinner
+        <EditText
             android:id="@+id/spinnerDiet"
             android:layout_width="match_parent"
             android:layout_height="@dimen/input_h"
-            android:background="@drawable/shape_input"
+            android:focusable="false"
+            android:textSize="@dimen/space_md"
+            android:paddingEnd="50dp"
+            android:maxLines="1"
+            android:inputType="textFilter|textNoSuggestions"
+            android:ellipsize="end"
+            android:background="@drawable/spinner_background"
             android:paddingHorizontal="@dimen/space_md"
             android:layout_marginTop="@dimen/space_sm"
             android:layout_marginHorizontal="@dimen/space_md"/>
@@ -82,7 +90,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Es un plato caliente?"
+                android:text="@string/isHotFood"
                 android:textSize="@dimen/space_md"/>
         </LinearLayout>
 
@@ -93,5 +101,13 @@
             android:layout_marginTop="@dimen/space_xl"
             android:layout_marginHorizontal="@dimen/space_md"
             android:text="@string/labelSend"/>
+        <TextView
+            android:id="@+id/error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/design_default_color_error"
+            android:visibility="invisible"/>
+
     </LinearLayout>
 </ScrollView>

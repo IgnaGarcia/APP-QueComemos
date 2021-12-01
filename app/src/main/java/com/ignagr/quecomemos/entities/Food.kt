@@ -22,11 +22,8 @@ data class Food(
 
     fun getTags(): String {
         val temp = if (isHot == true) "Caliente" else "Frio"
-        val diets = diet?.joinToString(
-            prefix = "[",
-            postfix = "]"
-        )
-        return "$type - $diets - $temp"
+        val diets = diet?.joinToString(", ")
+        return "$type - $temp\n$diets"
     }
 
     fun isNull(): Boolean{
@@ -42,5 +39,9 @@ data class Food(
                 "isHot" to isHot!!
             )
         } else return null
+    }
+
+    override fun toString() : String{
+        return "Food(name= ${name},\n\tisHot=${isHot},\n\ttype=${type},\n\tdiets=${diet.toString()}"
     }
 }
