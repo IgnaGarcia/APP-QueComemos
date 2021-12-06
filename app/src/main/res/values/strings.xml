@@ -1,22 +1,27 @@
 <resources>
     <string name="app_name">QueComemos</string>
+
     <string name="labelQueComemos">¿Que Comemos?</string>
+    <string name="createFood">Crear un nuevo Plato</string>
+    <string name="labelTodaySelection">La seleccion para hoy es…</string>
+    <string name="labelResults">Los resultados son:</string>
+
+    <string name="textSelectFood">Selecciona los platos de interes</string>
 
     <string name="itemHome">Inicio</string>
+    <string name="itemVote">Votacion</string>
     <string name="itemFoods">Platos</string>
     <string name="itemNewFood">Nuevo Plato</string>
 
-    <string name="labelTodaySelection">La seleccion para hoy es…</string>
     <string name="labelRegenerate">Regenerar</string>
     <string name="labelGoToVote">Ir a Votar</string>
-    <string name="labelVote">Votar</string>
+    <string name="labelVote">Siguiente</string>
     <string name="labelSend">Enviar</string>
-    <string name="labelResults">Los resultados son:</string>
     <string name="labelGoToHome">Ir al inicio</string>
-    <string name="labelFinishVote">Terminar</string>
+    <string name="labelFinishVote">Resultados</string>
+
     <string name="foodDiets">Dietas del Plato</string>
     <string name="foodType">Tipo del Plato</string>
-    <string name="createFood">Crear un nuevo Plato</string>
     <string name="foodName">Nombre del Plato</string>
     <string name="isHotFood">Es un plato caliente?</string>
 </resources>

@@ -1,40 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.vote.result.ResultFragment">
-
-    <TextView
-        android:id="@+id/tvSelection"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/labelResults"
-        android:textSize="@dimen/heading_md"
-        android:layout_marginHorizontal="@dimen/space_md"
-        android:layout_marginTop="@dimen/space_xxl"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nsvList"
+    tools:context=".ui.main.result.ResultFragment">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingVertical="@dimen/space_sm"
-        app:layout_constraintTop_toBottomOf="@id/tvSelection"
-        app:layout_constraintBottom_toTopOf="@id/btnGoToHome">
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvSelection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/labelResults"
+            android:textSize="@dimen/heading_md"
+            android:layout_marginHorizontal="@dimen/space_md"
+            android:layout_marginTop="@dimen/space_xxl"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:listitem="@layout/item_food"/>
-    </androidx.core.widget.NestedScrollView>
 
-    <Button
-        android:id="@+id/btnGoToHome"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/button_h"
-        android:text="@string/labelGoToHome"
-        android:layout_margin="@dimen/space_md"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btnGoToHome"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_h"
+            android:text="@string/labelGoToHome"
+            android:layout_margin="@dimen/space_md"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </LinearLayout>
+</ScrollView>
