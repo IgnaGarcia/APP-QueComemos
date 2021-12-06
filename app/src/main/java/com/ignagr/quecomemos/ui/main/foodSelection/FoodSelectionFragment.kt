@@ -25,7 +25,11 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
 
     private var foodAdapter : FoodAdapter? = null
     private lateinit var sharedPref: SharedPreferencesManager
-    private var filtered : MutableList<Food> = mutableListOf()
+
+    private val foodList = mutableListOf<Food>()
+    private val filtered = mutableListOf<Food>()
+    private var selection = listOf<Food>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,8 +45,6 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
         _binding = FragmentFoodSelectionBinding.bind(view)
         sharedPref = SharedPreferencesManager(requireContext())
 
-        //TODO: verificar si paso tiempo suficiente para pedir la lista denuevo
-        //TODO: obtener y cargar el ultimo filtro
         getFoodList()
 
         binding.btnVote.setOnClickListener {
@@ -50,38 +52,39 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
             //IntentManager(requireActivity()).goToVote()
         }
         binding.btnReroll.setOnClickListener {
-            Toast.makeText(requireContext(), "No disponible", Toast.LENGTH_SHORT).show()
+            randomChoice()
+            chargeFoodList(selection)
         }
     }
 
     private fun getFoodList(){
         FirestoreClient().getFoodList().addOnCompleteListener {
             if(it.isSuccessful){
-                filterResult(mapResult(it.result!!.documents))
-                chargeFoodList(randomChoice())
+                mapResult(it.result!!.documents)
+                filterResult()
+                randomChoice()
+                chargeFoodList(selection)
             } else if(it.isCanceled){
                 Log.e(it.exception!!.message, it.exception.toString())
             }
         }
     }
 
-    private fun randomChoice(): List<Food> {
-        val random = filtered.asSequence().shuffled().take(5).toList()
-        sharedPref.saveSelection(Selection(items = random))
-        return random
+    private fun randomChoice() {
+        selection = filtered.asSequence().shuffled().take(5).toList()
+        sharedPref.saveSelection(Selection(items = selection))
     }
 
-    private fun filterResult(items: MutableList<Food>){
+    private fun filterResult(){
         sharedPref.setLastFilter(Filter(true, listOf(), "")) //TODO: guardar el filtro
-        items.forEach {
+        foodList.forEach {
             // TODO: logica de filtro del usuario
             filtered.add(it)
         }
     }
 
-    private fun mapResult(docs: List<DocumentSnapshot>): MutableList<Food>{
-        val foodList = mutableListOf<Food>()
-        for(item in docs){
+    private fun mapResult(docs: List<DocumentSnapshot>): MutableList<Food> {
+        for (item in docs) {
             val food = item.toObject(Food::class.java)
             food?.let { foodList.add(food) }
         }

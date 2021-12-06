@@ -1,7 +1,7 @@
 package com.ignagr.quecomemos.entities
 
 class Selection(
-    val open: Boolean = true,
+    var open: Boolean = true,
     items: List<Food>) {
     val vote: MutableMap<Food, Int> = mutableMapOf()
 
