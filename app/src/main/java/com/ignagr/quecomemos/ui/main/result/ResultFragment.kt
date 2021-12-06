@@ -1,4 +1,4 @@
-package com.ignagr.quecomemos.ui.vote.result
+package com.ignagr.quecomemos.ui.main.result
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ignagr.quecomemos.R
 import com.ignagr.quecomemos.databinding.FragmentResultBinding
 import com.ignagr.quecomemos.entities.Food
+import com.ignagr.quecomemos.entities.Selection
+import com.ignagr.quecomemos.local.SharedPreferencesManager
+import com.ignagr.quecomemos.ui.main.MainActivity
 import com.ignagr.quecomemos.ui.main.foodSelection.FoodAdapter
-import com.ignagr.quecomemos.util.IntentManager
+import com.ignagr.quecomemos.ui.main.foodSelection.FoodSelectionFragment
 
 class ResultFragment : Fragment(R.layout.fragment_result) {
     private var _binding: FragmentResultBinding? = null
@@ -31,11 +34,12 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentResultBinding.bind(view)
 
-        val food = Food("Milanesa con Pure", "", listOf(""), true)
-        chargeFoodList(listOf(food, food, food, food, food, food, food))
+        chargeFoodList(SharedPreferencesManager(requireContext())
+            .getSelection()!!.vote.sortedByDescending { it.votes })
 
         binding.btnGoToHome.setOnClickListener {
-            IntentManager(requireActivity()).goToMain(true)
+            (requireActivity() as MainActivity).bottomBar.selectedItemId = R.id.itemHome
+            (requireActivity() as MainActivity).makeCurrentFragment(FoodSelectionFragment())
         }
     }
 

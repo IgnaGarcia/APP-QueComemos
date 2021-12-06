@@ -8,8 +8,11 @@ import com.ignagr.quecomemos.R
 import com.ignagr.quecomemos.databinding.ItemFoodBinding
 import com.ignagr.quecomemos.entities.Food
 
-class FoodAdapter(var foodList : List<Food>, val voting: Boolean = false, val result: Boolean = false) :
-    RecyclerView.Adapter<FoodAdapter.BaseViewHolder>(){
+class FoodAdapter(var foodList : List<Food>,
+                  val voting: Boolean = false,
+                  val result: Boolean = false,
+                  var onClickCheckbox : OnClickCheckbox? = null) :
+    RecyclerView.Adapter<FoodAdapter.BaseViewHolder>() {
 
     inner class BaseViewHolder(view : View) : RecyclerView.ViewHolder(view) {
         val binding = ItemFoodBinding.bind(view)
@@ -20,11 +23,20 @@ class FoodAdapter(var foodList : List<Food>, val voting: Boolean = false, val re
 
             if(voting){
                 binding.checkSelected.visibility = View.VISIBLE
+                binding.checkSelected.setOnCheckedChangeListener { _, isChecked ->
+                    onClickCheckbox!!.onClickCheckbox(food, isChecked)
+                }
             } else if (result){
-                binding.tvVotes.text = "5 Votos"
+                binding.tvVotes.text =
+                    if(food.votes == 1) "${food.votes} Voto"
+                    else "${food.votes} Votos"
                 binding.tvVotes.visibility = View.VISIBLE
             }
         }
+    }
+
+    interface OnClickCheckbox{
+        fun onClickCheckbox(food: Food, selected: Boolean)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)

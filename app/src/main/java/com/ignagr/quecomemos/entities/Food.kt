@@ -45,4 +45,10 @@ class Food(
     override fun toString() : String{
         return "Food(name= ${name},\n\tisHot=${isHot},\n\ttype=${type},\n\tdiets=${diet.toString()}"
     }
+
+    override fun equals(other: Any?): Boolean {
+        if(other == null) return false
+        if(other !is Food) return false
+        return other.name == name && other.isHot == isHot && other.type == type && diet == other.diet
+    }
 }

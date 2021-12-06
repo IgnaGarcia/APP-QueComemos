@@ -21,7 +21,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.main.MainActivity" />
-        <activity android:name=".ui.vote.VoteActivity" />
 
 
         <meta-data

@@ -17,6 +17,8 @@ import com.ignagr.quecomemos.entities.Food
 import com.ignagr.quecomemos.entities.Selection
 import com.ignagr.quecomemos.local.SharedPreferencesManager
 import com.ignagr.quecomemos.remote.FirestoreClient
+import com.ignagr.quecomemos.ui.main.MainActivity
+import com.ignagr.quecomemos.ui.main.elect.ElectFragment
 import com.ignagr.quecomemos.util.IntentManager
 
 class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
@@ -55,8 +57,8 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
         }
 
         binding.btnVote.setOnClickListener {
-            Toast.makeText(requireContext(), "No disponible", Toast.LENGTH_SHORT).show()
-            //IntentManager(requireActivity()).goToVote()
+            (requireActivity() as MainActivity).bottomBar.selectedItemId = R.id.itemVote
+            (requireActivity() as MainActivity).makeCurrentFragment(ElectFragment())
         }
         binding.btnReroll.setOnClickListener {
             randomChoice()

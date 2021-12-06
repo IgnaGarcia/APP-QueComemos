@@ -7,6 +7,12 @@
         android:icon="@drawable/ic_home"/>
 
     <item
+        android:id="@+id/itemVote"
+        android:enabled="true"
+        android:title="@string/itemVote"
+        android:icon="@drawable/ic_hand"/>
+
+    <item
         android:id="@+id/itemFoods"
         android:enabled="true"
         android:title="@string/itemFoods"
