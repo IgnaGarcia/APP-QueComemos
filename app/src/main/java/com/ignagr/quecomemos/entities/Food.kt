@@ -2,11 +2,12 @@ package com.ignagr.quecomemos.entities
 
 import com.google.firebase.firestore.DocumentSnapshot
 
-data class Food(
+class Food(
     val name: String? = "",
     val type: String? = "",
     val diet: List<String>? = listOf(),
-    val isHot: Boolean? = false
+    val isHot: Boolean? = false,
+    var votes: Int? = 0
 ) {
 
     companion object{

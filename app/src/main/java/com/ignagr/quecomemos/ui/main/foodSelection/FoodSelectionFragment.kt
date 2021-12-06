@@ -28,7 +28,7 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
 
     private val foodList = mutableListOf<Food>()
     private val filtered = mutableListOf<Food>()
-    private var selection = listOf<Food>()
+    private lateinit var selection: Selection
 
 
     override fun onCreateView(
@@ -45,7 +45,14 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
         _binding = FragmentFoodSelectionBinding.bind(view)
         sharedPref = SharedPreferencesManager(requireContext())
 
-        getFoodList()
+        val lastUpdate = sharedPref.getLastUpdate()
+        if(lastUpdate != null && lastUpdate > (System.currentTimeMillis() - 21_600_000)
+            && sharedPref.getSelection() != null){
+            selection = sharedPref.getSelection()!!
+            chargeFoodList(selection.vote)
+        } else{
+            getFoodList()
+        }
 
         binding.btnVote.setOnClickListener {
             Toast.makeText(requireContext(), "No disponible", Toast.LENGTH_SHORT).show()
@@ -53,7 +60,7 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
         }
         binding.btnReroll.setOnClickListener {
             randomChoice()
-            chargeFoodList(selection)
+            chargeFoodList(selection.vote)
         }
     }
 
@@ -63,7 +70,7 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
                 mapResult(it.result!!.documents)
                 filterResult()
                 randomChoice()
-                chargeFoodList(selection)
+                chargeFoodList(selection.vote)
             } else if(it.isCanceled){
                 Log.e(it.exception!!.message, it.exception.toString())
             }
@@ -71,8 +78,10 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
     }
 
     private fun randomChoice() {
-        selection = filtered.asSequence().shuffled().take(5).toList()
-        sharedPref.saveSelection(Selection(items = selection))
+        selection = Selection(vote =
+            filtered.asSequence().shuffled().take(5).toList()
+        )
+        sharedPref.saveSelection(selection)
     }
 
     private fun filterResult(){

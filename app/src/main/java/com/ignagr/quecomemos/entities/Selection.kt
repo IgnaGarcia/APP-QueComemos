@@ -2,20 +2,13 @@ package com.ignagr.quecomemos.entities
 
 class Selection(
     var open: Boolean = true,
-    items: List<Food>) {
-    val vote: MutableMap<Food, Int> = mutableMapOf()
+    val vote: List<Food>) {
 
-    init {
-        items.forEach {
-            vote[it] = 0
-        }
+    fun voteTo(idx: Int){
+        if(open) vote[idx].votes = vote[idx].votes?.plus(1)
     }
 
-    fun voteTo(food: Food){
-        if(open) vote[food]?.plus(1)
-    }
-
-    fun voteTo(foodList: List<Food>){
-        if(open) foodList.forEach { voteTo(it) }
+    fun voteTo(idxList: List<Int>){
+        if(open) idxList.forEach { voteTo(it) }
     }
 }

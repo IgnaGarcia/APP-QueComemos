@@ -2,6 +2,7 @@ package com.ignagr.quecomemos.local
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import com.google.gson.Gson
 import com.ignagr.quecomemos.entities.Filter
 import com.ignagr.quecomemos.entities.Selection
