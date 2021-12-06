@@ -19,6 +19,7 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
     private val binding get() = _binding!!
 
     private var foodAdapter : FoodAdapter? = null
+    private val foodList = mutableListOf<Food>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,30 +34,50 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentFoodSelectionBinding.bind(view)
 
-
         getFoodList()
 
         binding.btnVote.setOnClickListener {
             IntentManager(requireActivity()).goToVote()
         }
         binding.btnReroll.setOnClickListener {
-
+            makeSelectionWithFilter()
         }
     }
 
     private fun getFoodList(){
         FirestoreClient().getFoodList().addOnCompleteListener {
             if(it.isSuccessful){
-                val foodList = mutableListOf<Food>()
                 for(item in it.result!!.documents){
                     val food = item.toObject(Food::class.java)
                     food?.let { foodList.add(food) }
                 }
-                chargeFoodList(foodList)
+                makeSelectionWithFilter()
             } else if(it.isCanceled){
                 Log.e(it.exception!!.message, it.exception.toString())
             }
         }
+    }
+
+    private fun makeSelectionWithFilter(){
+        //filtro
+        val filtered = foodList
+        val choice = mutableSetOf<Food>()
+        var selection = mutableListOf<Food>()
+
+        if(filtered.size > 5 ){
+            for(i in 1..5){
+                var selected = foodList.random()
+                while(choice.contains(selected)){
+                    selected = foodList.random()
+                }
+                choice.add(selected)
+            }
+            selection = choice.toMutableList()
+        } else {
+            selection = foodList
+        }
+
+        chargeFoodList(selection)
     }
 
     private fun chargeFoodList(mapTravelList: List<Food>) {
