@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/foodName"
-            android:textSize="@dimen/space_md"
+            android:textSize="@dimen/text_md"
             android:layout_marginTop="@dimen/space_3xl"
             android:layout_marginHorizontal="@dimen/space_md"/>
         <EditText
@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/foodType"
-            android:textSize="@dimen/space_md"
+            android:textSize="@dimen/text_md"
             android:layout_marginTop="@dimen/space_xl"
             android:layout_marginHorizontal="@dimen/space_md"/>
         <Spinner
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/foodDiets"
-            android:textSize="@dimen/space_md"
+            android:textSize="@dimen/text_md"
             android:layout_marginTop="@dimen/space_xl"
             android:layout_marginHorizontal="@dimen/space_md"/>
         <EditText
@@ -67,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/input_h"
             android:focusable="false"
-            android:textSize="@dimen/space_md"
+            android:textSize="@dimen/text_md"
             android:paddingEnd="50dp"
             android:maxLines="1"
             android:inputType="textFilter|textNoSuggestions"
@@ -91,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/isHotFood"
-                android:textSize="@dimen/space_md"/>
+                android:textSize="@dimen/text_md"/>
         </LinearLayout>
 
         <Button

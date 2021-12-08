@@ -15,8 +15,7 @@
         android:textSize="@dimen/heading_md"
         android:layout_marginHorizontal="@dimen/space_md"
         android:layout_marginTop="@dimen/space_xxl"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <LinearLayout
         android:id="@+id/llButtons"
@@ -30,7 +29,7 @@
         <Button
             android:id="@+id/btnVote"
             android:layout_width="0dp"
-            android:layout_weight="1.3"
+            android:layout_weight="1.2"
             android:layout_height="match_parent"
             android:text="@string/labelGoToVote"
             android:layout_marginHorizontal="@dimen/space_sm"
@@ -40,13 +39,21 @@
         <Button
             android:id="@+id/btnReroll"
             android:layout_width="0dp"
-            android:layout_weight="1.3"
+            android:layout_weight="1.2"
             android:layout_height="match_parent"
             android:backgroundTint="@color/turquoise"
             android:text="@string/labelRegenerate"
             android:layout_marginHorizontal="@dimen/space_sm"
             app:layout_constraintLeft_toRightOf="@id/btnVote"
             app:layout_constraintRight_toRightOf="parent"/>
+        <ImageButton
+            android:id="@+id/btnFilter"
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:layout_height="@dimen/button_h"
+            android:src="@drawable/ic_filter"
+            android:tint="@color/red"
+            android:backgroundTint="@color/transparent"/>
     </LinearLayout>
 
     <androidx.core.widget.NestedScrollView

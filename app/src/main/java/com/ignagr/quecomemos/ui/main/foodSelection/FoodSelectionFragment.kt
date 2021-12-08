@@ -1,5 +1,6 @@
 package com.ignagr.quecomemos.ui.main.foodSelection
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,6 +20,7 @@ import com.ignagr.quecomemos.local.SharedPreferencesManager
 import com.ignagr.quecomemos.remote.FirestoreClient
 import com.ignagr.quecomemos.ui.main.MainActivity
 import com.ignagr.quecomemos.ui.main.elect.ElectFragment
+import com.ignagr.quecomemos.ui.main.foodSelection.filterDialogFragment.FilterDialogFragment
 import com.ignagr.quecomemos.util.IntentManager
 
 class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
@@ -29,7 +31,7 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
     private lateinit var sharedPref: SharedPreferencesManager
 
     private val foodList = mutableListOf<Food>()
-    private val filtered = mutableListOf<Food>()
+    private var filtered = mutableListOf<Food>()
     private lateinit var selection: Selection
 
 
@@ -64,6 +66,12 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
             randomChoice()
             chargeFoodList(selection.vote)
         }
+        binding.btnFilter.setOnClickListener {
+            FilterDialogFragment().show(requireActivity().supportFragmentManager, "filter dialog")
+            filterResult()
+            randomChoice()
+            chargeFoodList(selection.vote)
+        }
     }
 
     private fun getFoodList(){
@@ -87,10 +95,13 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
     }
 
     private fun filterResult(){
-        sharedPref.setLastFilter(Filter(true, listOf(), "")) //TODO: guardar el filtro
-        foodList.forEach {
-            // TODO: logica de filtro del usuario
-            filtered.add(it)
+        val filter = sharedPref.getLastFilter()
+        if(filter != null && filter.apply){
+            foodList.forEach {
+                if(filter.evaluate(it)) filtered.add(it)
+            }
+        } else {
+            filtered = foodList
         }
     }
 
