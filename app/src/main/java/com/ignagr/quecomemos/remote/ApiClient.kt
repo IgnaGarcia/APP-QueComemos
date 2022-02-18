@@ -61,7 +61,7 @@ class ApiClient {
             fun getFoods(@Query("id") id: String?,
                          @Query("type") type: String?,
                          @Query("culture") culture: String?,
-                         @Query("hot") hot: String?
+                         @Query("hot") hot: Boolean?
             ): Single<List<Food>>
 
             @POST("foods")

@@ -12,6 +12,10 @@ import com.ignagr.quecomemos.databinding.FragmentNewFoodBinding
 import com.ignagr.quecomemos.entities.Food
 
 import android.util.Log
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import com.ignagr.quecomemos.remote.request.FoodRequest
+import com.ignagr.quecomemos.ui.main.foodSelection.FoodViewModel
 import java.util.*
 
 
@@ -20,6 +24,7 @@ class NewFoodFragment : Fragment(R.layout.fragment_new_food) {
     private val binding get() = _binding!!
 
     private val dietSelected = mutableMapOf<Int, String>()
+    private lateinit var foodViewModel: NewFoodViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,11 +39,24 @@ class NewFoodFragment : Fragment(R.layout.fragment_new_food) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentNewFoodBinding.bind(view)
 
+        initFoodViewModel()
         setUpSpinners()
 
         binding.btnSend.setOnClickListener {
             if(validInputs()) sendRequest()
         }
+    }
+
+    private fun initFoodViewModel(){
+        foodViewModel = ViewModelProvider(this)[NewFoodViewModel::class.java]
+
+        foodViewModel.obsNewFood().observe(requireActivity(), {
+            Toast.makeText(requireContext(), "Comida creada!", Toast.LENGTH_SHORT).show()
+        })
+
+        foodViewModel.showError()?.observe(requireActivity(), {
+            Log.e("NEW FOOD", it)
+        })
     }
 
     private fun setUpSpinners(){
@@ -85,11 +103,11 @@ class NewFoodFragment : Fragment(R.layout.fragment_new_food) {
         }
     }
 
-    private fun sendRequest(){
-        val food = Food(binding.etName.text.toString(), binding.spinnerType.selectedItem.toString(),
-            dietSelected.values.toList(), binding.cbHot.isChecked)
+    private fun sendRequest(){ // TODO binding culture
+        val food = FoodRequest(binding.etName.text.toString(), binding.spinnerType.selectedItem.toString(),
+            dietSelected.values.toList(), "TODO culture", binding.cbHot.isChecked)
         Log.e("SENDING", food.toString())
-        FirestoreClient().saveFood(food)
+        foodViewModel.create(food)
     }
 
     private fun showError(msg:String){

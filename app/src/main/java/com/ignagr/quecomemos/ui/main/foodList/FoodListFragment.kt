@@ -6,17 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ignagr.quecomemos.R
 import com.ignagr.quecomemos.databinding.FragmentFoodListBinding
 import com.ignagr.quecomemos.entities.Food
 import com.ignagr.quecomemos.ui.main.foodSelection.FoodAdapter
+import com.ignagr.quecomemos.ui.main.foodSelection.FoodViewModel
 
 class FoodListFragment : Fragment(R.layout.fragment_food_list) {
     private var _binding: FragmentFoodListBinding? = null
     private val binding get() = _binding!!
 
     private var foodAdapter : FoodAdapter? = null
+    private lateinit var foodViewModel: FoodViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,27 +35,24 @@ class FoodListFragment : Fragment(R.layout.fragment_food_list) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentFoodListBinding.bind(view)
 
-        getFoodList()
+        initFoodViewModel()
+        foodViewModel.getList()
     }
 
+    private fun initFoodViewModel(){
+        foodViewModel = ViewModelProvider(this)[FoodViewModel::class.java]
 
-    private fun getFoodList(){
-        FirestoreClient().getFoodList().addOnCompleteListener {
-            if(it.isSuccessful){
-                val foodList = mutableListOf<Food>()
-                for(item in it.result!!.documents){
-                    val food = item.toObject(Food::class.java)
-                    food?.let { foodList.add(food) }
-                }
-                chargeFoodList(foodList)
-            } else if(it.isCanceled){
-                Log.e(it.exception!!.message, it.exception.toString())
-            }
-        }
+        foodViewModel.obsList().observe(requireActivity(), {
+            chargeFoodList(it)
+        })
+
+        foodViewModel.showError()?.observe(requireActivity(), {
+            Log.e("GET FOOD LIST", it)
+        })
     }
 
-    private fun chargeFoodList(mapTravelList: List<Food>) {
-        foodAdapter = FoodAdapter(mapTravelList)
+    private fun chargeFoodList(list: List<Food>) {
+        foodAdapter = FoodAdapter(list)
         binding.rvFood.adapter = foodAdapter
         binding.rvFood.layoutManager = LinearLayoutManager(
             requireActivity(), LinearLayoutManager.VERTICAL, false)

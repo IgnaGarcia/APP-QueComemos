@@ -10,8 +10,9 @@ import io.reactivex.schedulers.Schedulers
 
 class FoodRepository {
 
-    fun getFoods(): Single<List<Food>> {
-        return ApiClient.getInstance().getFoods()
+    fun getFoods(id: String?, type: String?,
+                 culture: String?, hot: Boolean?): Single<List<Food>> {
+        return ApiClient.getInstance().getFoods(id, type, culture, hot)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

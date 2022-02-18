@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.firestore.DocumentSnapshot
 import com.ignagr.quecomemos.R
 import com.ignagr.quecomemos.databinding.FragmentFoodSelectionBinding
 import com.ignagr.quecomemos.entities.Food
@@ -23,6 +23,7 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
 
     private var foodAdapter : FoodAdapter? = null
     private lateinit var sharedPref: SharedPreferencesManager
+    private lateinit var foodViewModel: FoodViewModel
 
     private val foodList = mutableListOf<Food>()
     private var filtered = mutableListOf<Food>()
@@ -42,6 +43,7 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentFoodSelectionBinding.bind(view)
         sharedPref = SharedPreferencesManager(requireContext())
+        initFoodViewModel()
 
         val lastUpdate = sharedPref.getLastUpdate()
         if(lastUpdate != null && lastUpdate > (System.currentTimeMillis() - 21_600_000)
@@ -68,7 +70,20 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
         }
     }
 
+    private fun initFoodViewModel(){
+        foodViewModel = ViewModelProvider(this)[FoodViewModel::class.java]
+
+        foodViewModel.obsList().observe(requireActivity(), {
+            chargeFoodList(it)
+        })
+
+        foodViewModel.showError()?.observe(requireActivity(), {
+            Log.e("GET FOOD LIST", it)
+        })
+    }
+
     private fun getFoodList(){
+        foodViewModel.getList()/* TODO send filters and post filter by diet
         FirestoreClient().getFoodList().addOnCompleteListener {
             if(it.isSuccessful){
                 mapResult(it.result!!.documents)
@@ -78,7 +93,7 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
             } else if(it.isCanceled){
                 Log.e(it.exception!!.message, it.exception.toString())
             }
-        }
+        }*/
     }
 
     private fun randomChoice() {
@@ -97,14 +112,6 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
         } else {
             filtered = foodList
         }
-    }
-
-    private fun mapResult(docs: List<DocumentSnapshot>): MutableList<Food> {
-        for (item in docs) {
-            val food = item.toObject(Food::class.java)
-            food?.let { foodList.add(food) }
-        }
-        return foodList
     }
 
     private fun chargeFoodList(mapTravelList: List<Food>) {
