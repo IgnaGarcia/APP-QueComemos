@@ -24,10 +24,15 @@
     <string name="foodType">Tipo del Plato</string>
     <string name="foodName">Nombre del Plato</string>
     <string name="isHotFood">Es un plato caliente?</string>
+
     <string name="labelApplyFilter">Aplicar Filtros</string>
     <string name="labelHot">Caliente</string>
     <string name="labelCold">Frio</string>
     <string name="labelFilters">Filtros</string>
     <string name="labelCancel">Cancelar</string>
     <string name="labelApply">Aplicar</string>
+
+    <!-- ERRORS -->
+    <string name="not_found">Elemento no encontrado</string>
+    <string name="unknown_error">Error, intente mas tarde</string>
 </resources>

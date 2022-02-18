@@ -10,11 +10,7 @@ import androidx.fragment.app.Fragment
 import com.ignagr.quecomemos.R
 import com.ignagr.quecomemos.databinding.FragmentNewFoodBinding
 import com.ignagr.quecomemos.entities.Food
-import com.ignagr.quecomemos.remote.FirestoreClient
-import android.widget.Toast
 
-import android.content.DialogInterface
-import android.content.DialogInterface.OnMultiChoiceClickListener
 import android.util.Log
 import java.util.*
 

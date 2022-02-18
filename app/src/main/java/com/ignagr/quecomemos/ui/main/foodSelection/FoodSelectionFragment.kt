@@ -1,27 +1,21 @@
 package com.ignagr.quecomemos.ui.main.foodSelection
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.DocumentSnapshot
 import com.ignagr.quecomemos.R
 import com.ignagr.quecomemos.databinding.FragmentFoodSelectionBinding
-import com.ignagr.quecomemos.entities.Filter
 import com.ignagr.quecomemos.entities.Food
 import com.ignagr.quecomemos.entities.Selection
 import com.ignagr.quecomemos.local.SharedPreferencesManager
-import com.ignagr.quecomemos.remote.FirestoreClient
 import com.ignagr.quecomemos.ui.main.MainActivity
 import com.ignagr.quecomemos.ui.main.elect.ElectFragment
 import com.ignagr.quecomemos.ui.main.foodSelection.filterDialogFragment.FilterDialogFragment
-import com.ignagr.quecomemos.util.IntentManager
 
 class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
     private var _binding: FragmentFoodSelectionBinding? = null

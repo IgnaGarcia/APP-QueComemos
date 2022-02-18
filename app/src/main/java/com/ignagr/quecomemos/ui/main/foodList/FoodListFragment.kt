@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ignagr.quecomemos.R
 import com.ignagr.quecomemos.databinding.FragmentFoodListBinding
 import com.ignagr.quecomemos.entities.Food
-import com.ignagr.quecomemos.remote.FirestoreClient
 import com.ignagr.quecomemos.ui.main.foodSelection.FoodAdapter
 
 class FoodListFragment : Fragment(R.layout.fragment_food_list) {

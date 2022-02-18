@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Proyects/personal/QueComemos/app/src/main/res/drawable/spinner_background.xml" value="0.31296296296296294" />
         <entry key="..\:/Proyects/personal/QueComemos/app/src/main/res/layout/dialog_filters.xml" value="0.36666666666666664" />
         <entry key="..\:/Proyects/personal/QueComemos/app/src/main/res/layout/fragment_elect.xml" value="0.36666666666666664" />
         <entry key="..\:/Proyects/personal/QueComemos/app/src/main/res/layout/fragment_food_selection.xml" value="0.21979166666666666" />
