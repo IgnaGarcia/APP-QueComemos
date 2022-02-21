@@ -2,16 +2,16 @@ package com.ignagr.quecomemos.entities
 
 class Filter(
     val apply: Boolean = false,
-    val isHot: Boolean?,
-    val diet: List<String>?,
-    val type: String?,
-    val culture: String?
+    val isHot: Boolean? = null,
+    val diet: List<String>? = null,
+    val type: String? = null,
+    val culture: String? = null
 ){
 
     fun evaluate(food: Food): Boolean { // TODO add new filters
         if(isHot != null && isHot != food.isHot) return false
         if(type != null && type != food.type) return false
-        if(!diet.isNullOrEmpty() && !dietsWithIntersection(diet, food.diet!!)) return false
+        if(!diet.isNullOrEmpty() && !dietsWithIntersection(diet, food.diet)) return false
 
         return true
     }

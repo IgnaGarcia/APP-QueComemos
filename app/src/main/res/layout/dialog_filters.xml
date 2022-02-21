@@ -3,27 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/filters"
     android:layout_width="match_parent"
+    android:minWidth="400dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".ui.main.foodSelection.filterDialogFragment.FilterDialogFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/labelFilters"
-        android:textSize="@dimen/heading_md"
         android:layout_marginTop="@dimen/space_xl"
-        android:layout_marginHorizontal="@dimen/space_xl"
-        android:textColor="@color/turquoise"/>
+        android:layout_marginHorizontal="@dimen/space_xl">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/labelFilters"
+            android:textSize="@dimen/heading_md"
+            android:gravity="start|center"
+            android:textColor="@color/turquoise"/>
 
-    <CheckBox
-        android:id="@+id/checkType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/foodType"
-        android:textSize="@dimen/text_md"
-        android:layout_marginTop="@dimen/space_xl"
-        android:layout_marginHorizontal="@dimen/space_md"/>
+        <Button
+            android:id="@+id/btnErase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/QueComemos.Button.Text"
+            android:textColor="@color/white_dark"
+            android:text="@string/labelErase"
+            android:textSize="@dimen/text_sm"/>
+    </LinearLayout>
+
     <Spinner
         android:id="@+id/spinnerType"
         android:layout_width="match_parent"
@@ -33,14 +41,15 @@
         android:layout_marginTop="@dimen/space_sm"
         android:layout_marginHorizontal="@dimen/space_md"/>
 
-    <CheckBox
-        android:id="@+id/checkDiets"
+    <Spinner
+        android:id="@+id/spinnerCulture"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/foodDiets"
-        android:textSize="@dimen/text_md"
-        android:layout_marginTop="@dimen/space_xl"
+        android:layout_height="@dimen/input_h"
+        android:background="@drawable/spinner_background"
+        android:paddingHorizontal="@dimen/space_md"
+        android:layout_marginTop="@dimen/space_sm"
         android:layout_marginHorizontal="@dimen/space_md"/>
+
     <EditText
         android:id="@+id/spinnerDiet"
         android:layout_width="match_parent"
@@ -67,12 +76,14 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:text="@string/labelHot"/>
         <RadioButton
             android:id="@+id/cold"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:text="@string/labelCold"/>
     </RadioGroup>
 
@@ -83,6 +94,14 @@
         android:layout_marginTop="@dimen/space_sm"
         android:paddingHorizontal="@dimen/space_md">
         <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_h_sm"
+            style="@style/QueComemos.Button.Text"
+            android:text="@string/labelCancel"
+            android:textSize="@dimen/text_md"/>
+
+        <Button
             android:id="@+id/btnSave"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button_h_sm"
@@ -91,13 +110,5 @@
             android:text="@string/labelApply"
             android:textSize="@dimen/text_md"
             android:layout_marginHorizontal="@dimen/space_md"/>
-
-        <Button
-            android:id="@+id/btnCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/button_h_sm"
-            style="@style/QueComemos.Button.Text"
-            android:text="@string/labelCancel"
-            android:textSize="@dimen/text_md"/>
     </LinearLayout>
 </LinearLayout>

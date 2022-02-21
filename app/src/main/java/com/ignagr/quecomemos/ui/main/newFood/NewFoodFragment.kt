@@ -12,6 +12,7 @@ import com.ignagr.quecomemos.databinding.FragmentNewFoodBinding
 import com.ignagr.quecomemos.entities.Food
 
 import android.util.Log
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.ignagr.quecomemos.remote.request.FoodRequest
@@ -40,7 +41,6 @@ class NewFoodFragment : Fragment(R.layout.fragment_new_food) {
         _binding = FragmentNewFoodBinding.bind(view)
 
         initFoodViewModel()
-        setUpSpinners()
 
         binding.btnSend.setOnClickListener {
             if(validInputs()) sendRequest()
@@ -54,31 +54,37 @@ class NewFoodFragment : Fragment(R.layout.fragment_new_food) {
             Toast.makeText(requireContext(), "Comida creada!", Toast.LENGTH_SHORT).show()
         })
 
+        foodViewModel.obsEnums().observe(requireActivity(), {
+            setUpSpinner(it.types, binding.spinnerType)
+            //setUpSpinner(it.cultures, binding.spinnerCultures)
+            setUpDietsPicker(it.diets)
+        })
+
         foodViewModel.showError()?.observe(requireActivity(), {
             Log.e("NEW FOOD", it)
         })
     }
 
-    private fun setUpSpinners(){
-        ArrayAdapter.createFromResource(requireContext(),
-            R.array.food_types,
-            android.R.layout.simple_spinner_item
+    private fun setUpSpinner(items: List<String>, spinner: Spinner){
+        ArrayAdapter(requireContext(),
+            android.R.layout.simple_spinner_item,
+            items
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.spinnerType.adapter = adapter
+            spinner.adapter = adapter
         }
+    }
 
-
-        val listItems = resources.getStringArray(R.array.food_diet)
+    private fun setUpDietsPicker(items: List<String>){
         val checkItems = mutableListOf<Boolean>()
-        listItems.forEach { _ -> checkItems.add(false) }
+        items.forEach { _ -> checkItems.add(false) }
 
-        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        val builder: AlertDialog.Builder =AlertDialog.Builder(requireContext())
         builder.setTitle("Dietas:")
 
-        builder.setMultiChoiceItems(listItems, checkItems.toBooleanArray()) { _, which, isChecked ->
+        builder.setMultiChoiceItems(items.toTypedArray(), checkItems.toBooleanArray()) { _, which, isChecked ->
             if (isChecked)
-                dietSelected[which] = listItems[which]
+                dietSelected[which] = items[which]
             else
                 dietSelected.remove(which)
             binding.spinnerDiet.setText(dietSelected.values.joinToString(","))
