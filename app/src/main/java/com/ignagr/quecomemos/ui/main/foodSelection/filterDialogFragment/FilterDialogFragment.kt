@@ -75,7 +75,7 @@ class FilterDialogFragment: DialogFragment(R.layout.dialog_filters) {
         else null
     }
 
-    private fun getFilter(): Filter = Filter(true, isHot(), getFoodDiets(), getFoodType())
+    private fun getFilter(): Filter = Filter(false, null, null, null, null)
 
     private fun setUpSpinners(){
         ArrayAdapter.createFromResource(requireContext(),

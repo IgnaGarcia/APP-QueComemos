@@ -50,7 +50,7 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
             selection = sharedPref.getSelection()!!
             chargeFoodList(selection.vote)
         } else{
-            foodViewModel.getList() // TODO add filter
+            getList()
         }
 
         binding.btnVote.setOnClickListener {
@@ -58,12 +58,20 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
             (requireActivity() as MainActivity).makeCurrentFragment(ElectFragment())
         }
         binding.btnReroll.setOnClickListener {
-            randomChoice()
-            chargeFoodList(selection.vote)
+            getList()
         }
         binding.btnFilter.setOnClickListener {
             FilterDialogFragment().show(requireActivity().supportFragmentManager, "filter dialog")
-            foodViewModel.getList() // TODO add filter
+            getList()
+        }
+    }
+
+    private fun getList(){
+        val filter = sharedPref.getLastFilter()
+        if(filter != null && filter.apply){
+            foodViewModel.getList(null, filter.type, filter.culture, filter.isHot)
+        } else {
+            foodViewModel.getList()
         }
     }
 

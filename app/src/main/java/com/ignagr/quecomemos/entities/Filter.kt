@@ -4,7 +4,8 @@ class Filter(
     val apply: Boolean = false,
     val isHot: Boolean?,
     val diet: List<String>?,
-    val type: String?
+    val type: String?,
+    val culture: String?
 ){
 
     fun evaluate(food: Food): Boolean { // TODO add new filters

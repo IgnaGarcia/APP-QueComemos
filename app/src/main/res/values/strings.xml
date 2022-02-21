@@ -13,8 +13,8 @@
     <string name="itemFoods">Platos</string>
     <string name="itemNewFood">Nuevo Plato</string>
 
-    <string name="labelRegenerate">Regenerar</string>
-    <string name="labelGoToVote">Ir a Votar</string>
+    <string name="labelRegenerate">ReRoll</string>
+    <string name="labelGoToVote">Votar</string>
     <string name="labelVote">Siguiente</string>
     <string name="labelSend">Enviar</string>
     <string name="labelGoToHome">Ir al inicio</string>
