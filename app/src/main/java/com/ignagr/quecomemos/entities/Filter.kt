@@ -7,7 +7,7 @@ class Filter(
     val type: String?
 ){
 
-    fun evaluate(food: Food): Boolean {
+    fun evaluate(food: Food): Boolean { // TODO add new filters
         if(isHot != null && isHot != food.isHot) return false
         if(type != null && type != food.type) return false
         if(!diet.isNullOrEmpty() && !dietsWithIntersection(diet, food.diet!!)) return false

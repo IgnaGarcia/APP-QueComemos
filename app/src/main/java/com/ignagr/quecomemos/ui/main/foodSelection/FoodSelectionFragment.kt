@@ -25,7 +25,6 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
     private lateinit var sharedPref: SharedPreferencesManager
     private lateinit var foodViewModel: FoodViewModel
 
-    private val foodList = mutableListOf<Food>()
     private var filtered = mutableListOf<Food>()
     private lateinit var selection: Selection
 
@@ -51,7 +50,7 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
             selection = sharedPref.getSelection()!!
             chargeFoodList(selection.vote)
         } else{
-            getFoodList()
+            foodViewModel.getList() // TODO add filter
         }
 
         binding.btnVote.setOnClickListener {
@@ -64,9 +63,7 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
         }
         binding.btnFilter.setOnClickListener {
             FilterDialogFragment().show(requireActivity().supportFragmentManager, "filter dialog")
-            filterResult()
-            randomChoice()
-            chargeFoodList(selection.vote)
+            foodViewModel.getList() // TODO add filter
         }
     }
 
@@ -74,26 +71,14 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
         foodViewModel = ViewModelProvider(this)[FoodViewModel::class.java]
 
         foodViewModel.obsList().observe(requireActivity(), {
+            filterResult(it)
+            randomChoice()
             chargeFoodList(it)
         })
 
         foodViewModel.showError()?.observe(requireActivity(), {
             Log.e("GET FOOD LIST", it)
         })
-    }
-
-    private fun getFoodList(){
-        foodViewModel.getList()/* TODO send filters and post filter by diet
-        FirestoreClient().getFoodList().addOnCompleteListener {
-            if(it.isSuccessful){
-                mapResult(it.result!!.documents)
-                filterResult()
-                randomChoice()
-                chargeFoodList(selection.vote)
-            } else if(it.isCanceled){
-                Log.e(it.exception!!.message, it.exception.toString())
-            }
-        }*/
     }
 
     private fun randomChoice() {
@@ -103,14 +88,14 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
         sharedPref.saveSelection(selection)
     }
 
-    private fun filterResult(){
+    private fun filterResult(list: List<Food>){
         val filter = sharedPref.getLastFilter()
         if(filter != null && filter.apply){
-            foodList.forEach {
+            list.forEach {
                 if(filter.evaluate(it)) filtered.add(it)
             }
         } else {
-            filtered = foodList
+            filtered = list as MutableList<Food>
         }
     }
 
