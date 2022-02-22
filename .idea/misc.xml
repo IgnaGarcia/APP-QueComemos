@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="..\:/Proyects/personal/QueComemos/app/src/main/res/drawable/spinner_background.xml" value="0.31296296296296294" />
         <entry key="..\:/Proyects/personal/QueComemos/app/src/main/res/layout/activity_splash.xml" value="0.21770833333333334" />
         <entry key="..\:/Proyects/personal/QueComemos/app/src/main/res/layout/dialog_filters.xml" value="0.36666666666666664" />
@@ -11,6 +12,10 @@
         <entry key="..\:/Proyects/personal/QueComemos/app/src/main/res/layout/fragment_new_food.xml" value="0.36666666666666664" />
         <entry key="..\:/Proyects/personal/QueComemos/app/src/main/res/layout/fragment_result.xml" value="0.18645833333333334" />
         <entry key="..\:/Proyects/personal/QueComemos/app/src/main/res/layout/layout_filters.xml" value="0.36666666666666664" />
+=======
+        <entry key="..\:/Proyects/personal/QueComemos/app/src/main/res/layout/fragment_elect.xml" value="0.36666666666666664" />
+        <entry key="..\:/Proyects/personal/QueComemos/app/src/main/res/layout/fragment_result.xml" value="0.18645833333333334" />
+>>>>>>> 15d87e79fcf9f0edc1579b9582e593e8e5537664
         <entry key="..\:/Proyects/personal/QueComemos/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22239583333333332" />
         <entry key="..\:/Users/ignag/Proyects/infinix/QueComemos/app/src/main/res/drawable-v24/ic_back.xml" value="0.1527777777777778" />
         <entry key="..\:/Users/ignag/Proyects/infinix/QueComemos/app/src/main/res/drawable/ic_add.xml" value="0.3265625" />
