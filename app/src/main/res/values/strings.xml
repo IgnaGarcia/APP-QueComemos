@@ -18,7 +18,7 @@
     <string name="labelVote">Siguiente</string>
     <string name="labelSend">Enviar</string>
     <string name="labelGoToHome">Ir al inicio</string>
-    <string name="labelFinishVote">Resultados</string>
+    <string name="labelFinishVote">Terminar</string>
 
     <string name="foodDiets">Dietas del Plato</string>
     <string name="foodType">Tipo del Plato</string>
