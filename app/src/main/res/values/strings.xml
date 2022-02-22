@@ -36,4 +36,5 @@
     <string name="not_found">Elemento no encontrado</string>
     <string name="unknown_error">Error, intente mas tarde</string>
     <string name="labelErase">Deshabilitar</string>
+    <string name="foodCulture">Etnia del Plato</string>
 </resources>

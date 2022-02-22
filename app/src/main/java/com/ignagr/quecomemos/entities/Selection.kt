@@ -9,8 +9,8 @@ class Selection(
             for((i, f) in vote.withIndex()){
                 if(f == food) {
                     vote[i].votes =
-                        if (sum) vote[i].votes!! + 1
-                        else vote[i].votes!! - 1
+                        if (sum) vote[i].votes + 1
+                        else vote[i].votes - 1
                     break
                 }
             }

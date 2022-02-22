@@ -54,8 +54,10 @@ class FilterDialogFragment: DialogFragment(R.layout.dialog_filters) {
         foodViewModel = ViewModelProvider(this)[FoodViewModel::class.java]
 
         foodViewModel.obsEnums().observe(requireActivity(), {
-            setUpSpinner(it.types, binding.spinnerType) //TODO add null
-            setUpSpinner(it.cultures, binding.spinnerCulture) //TODO add null
+            (it.types as MutableList).add(0, "Ninguna")
+            setUpSpinner(it.types, binding.spinnerType)
+            (it.cultures as MutableList).add(0, "Otra")
+            setUpSpinner(it.cultures, binding.spinnerCulture)
             setUpDietsPicker(it.diets)
             preloadedFilter()
         })
@@ -101,6 +103,7 @@ class FilterDialogFragment: DialogFragment(R.layout.dialog_filters) {
         filter?.let{
             if(it.isHot == true) binding.hot.isChecked = true
             else if(it.isHot == false) binding.cold.isChecked = true
+            // TODO preloaded filter
         }
     }
 
@@ -110,15 +113,25 @@ class FilterDialogFragment: DialogFragment(R.layout.dialog_filters) {
             else null
     }
 
+    private fun getFoodCulture(): String? {
+        return if(binding.spinnerCulture.selectedItem != "Otra")
+            binding.spinnerCulture.selectedItem as String
+        else null
+    }
+
     private fun getFoodType(): String? {
-        return binding.spinnerType.selectedItem.toString()
+        return if(binding.spinnerType.selectedItem != "Ninguna")
+            binding.spinnerType.selectedItem as String
+        else null
     }
 
     private fun getFoodDiets(): List<String>? {
-        return dietSelected.values.toList()
+        return if(dietSelected.isEmpty()) null
+        else dietSelected.values.toList()
     }
 
-    private fun getFilter(): Filter = Filter(false, null, null, null, null)
+    private fun getFilter(): Filter = Filter(true, isHot(), getFoodDiets(),
+        getFoodType(), getFoodCulture())
 
 
     override fun onDestroy() {

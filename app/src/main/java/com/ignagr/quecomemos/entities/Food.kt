@@ -9,7 +9,7 @@ class Food(
     @SerializedName("diet") val diet: List<String> = listOf(),
     @SerializedName("culture") val culture: String,
     @SerializedName("hot") val isHot: Boolean = false,
-    var votes: Int? = 0
+    var votes: Int = 0
 ) {
 
     fun getTags(): String {

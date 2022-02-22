@@ -41,6 +41,7 @@ class NewFoodFragment : Fragment(R.layout.fragment_new_food) {
         _binding = FragmentNewFoodBinding.bind(view)
 
         initFoodViewModel()
+        foodViewModel.getEnums()
 
         binding.btnSend.setOnClickListener {
             if(validInputs()) sendRequest()
@@ -52,11 +53,13 @@ class NewFoodFragment : Fragment(R.layout.fragment_new_food) {
 
         foodViewModel.obsNewFood().observe(requireActivity(), {
             Toast.makeText(requireContext(), "Comida creada!", Toast.LENGTH_SHORT).show()
+            // TODO clear fields
         })
 
         foodViewModel.obsEnums().observe(requireActivity(), {
             setUpSpinner(it.types, binding.spinnerType)
-            //setUpSpinner(it.cultures, binding.spinnerCultures)
+            (it.cultures as MutableList).add(0, "Otra")
+            setUpSpinner(it.cultures, binding.spinnerCulture)
             setUpDietsPicker(it.diets)
         })
 
@@ -109,9 +112,12 @@ class NewFoodFragment : Fragment(R.layout.fragment_new_food) {
         }
     }
 
-    private fun sendRequest(){ // TODO binding culture
+    private fun sendRequest(){
+        val culture = if(binding.spinnerCulture.selectedItem != "Otro")
+            binding.spinnerCulture.selectedItem as String
+            else null
         val food = FoodRequest(binding.etName.text.toString(), binding.spinnerType.selectedItem.toString(),
-            dietSelected.values.toList(), "TODO culture", binding.cbHot.isChecked)
+            dietSelected.values.toList(), culture, binding.cbHot.isChecked)
         Log.e("SENDING", food.toString())
         foodViewModel.create(food)
     }

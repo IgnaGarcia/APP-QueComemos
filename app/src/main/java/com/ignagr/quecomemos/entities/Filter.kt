@@ -8,12 +8,9 @@ class Filter(
     val culture: String? = null
 ){
 
-    fun evaluate(food: Food): Boolean { // TODO add new filters
-        if(isHot != null && isHot != food.isHot) return false
-        if(type != null && type != food.type) return false
-        if(!diet.isNullOrEmpty() && !dietsWithIntersection(diet, food.diet)) return false
-
-        return true
+    fun evaluate(food: Food): Boolean {
+        return !(!diet.isNullOrEmpty()
+                && !dietsWithIntersection(diet, food.diet))
     }
 
     private fun dietsWithIntersection(l1: List<String>, l2: List<String>): Boolean{
