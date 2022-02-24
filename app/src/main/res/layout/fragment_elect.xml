@@ -9,7 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_gravity="center">
 
         <TextView
             android:id="@+id/tvSelection"
@@ -56,5 +57,14 @@
                 app:layout_constraintLeft_toRightOf="@id/btnVote"
                 app:layout_constraintRight_toRightOf="parent"/>
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvVoidList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/voidFoods"
+            android:textColor="@color/white_dark"
+            android:textAlignment="center"
+            android:visibility="gone"/>
     </LinearLayout>
 </ScrollView>

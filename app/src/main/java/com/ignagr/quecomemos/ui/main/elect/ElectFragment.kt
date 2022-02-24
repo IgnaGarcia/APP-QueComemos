@@ -21,7 +21,7 @@ class ElectFragment : Fragment(R.layout.fragment_elect), FoodAdapter.OnClickChec
 
     private var foodAdapter : FoodAdapter? = null
     private lateinit var sharedPref: SharedPreferencesManager
-    private lateinit var selection: Selection
+    private var selection: Selection? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,18 +37,32 @@ class ElectFragment : Fragment(R.layout.fragment_elect), FoodAdapter.OnClickChec
         _binding = FragmentElectBinding.bind(view)
         sharedPref = SharedPreferencesManager(requireContext())
 
-        selection = sharedPref.getSelection()!!
-        if(!selection.open)
-            (requireActivity() as MainActivity).makeCurrentFragment(ResultFragment())
-        chargeFoodList(selection.vote)
+        selection = sharedPref.getSelection()
 
-        binding.btnContinue.setOnClickListener {
-            chargeFoodList(selection.vote)
+        if(selection == null || selection!!.vote.isNullOrEmpty()){
+            binding.apply {
+                rvFood.visibility = View.GONE
+                tvSelection.visibility = View.GONE
+                llButtons.visibility = View.GONE
+                tvVoidList.visibility = View.VISIBLE
+            }
         }
-        binding.btnFinish.setOnClickListener {
-            selection.open = false
-            sharedPref.saveSelection(selection)
-            (requireActivity() as MainActivity).makeCurrentFragment(ResultFragment())
+        else {
+            selection?.let {
+                if(!it.open)
+                    (requireActivity() as MainActivity).makeCurrentFragment(ResultFragment())
+
+                chargeFoodList(it.vote)
+
+                binding.btnContinue.setOnClickListener { _ ->
+                    chargeFoodList(it.vote)
+                }
+                binding.btnFinish.setOnClickListener { _ ->
+                    it.open = false
+                    sharedPref.saveSelection(it)
+                    (requireActivity() as MainActivity).makeCurrentFragment(ResultFragment())
+                }
+            }
         }
     }
 
@@ -65,6 +79,6 @@ class ElectFragment : Fragment(R.layout.fragment_elect), FoodAdapter.OnClickChec
     }
 
     override fun onClickCheckbox(food: Food, selected: Boolean) {
-        selection.changeVote(food, selected)
+        selection?.changeVote(food, selected)
     }
 }
