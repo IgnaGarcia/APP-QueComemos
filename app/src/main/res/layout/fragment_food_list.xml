@@ -30,6 +30,24 @@
             tools:listitem="@layout/item_food"
             android:requiresFadingEdge="vertical"
             android:overScrollMode="always"
-            android:fadingEdgeLength="120dp"/>
+            android:fadingEdgeLength="120dp"
+            android:visibility="gone"/>
     </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/pbList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvSelection"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <TextView
+        android:id="@+id/tvVoidList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/voidFoods"
+        android:textColor="@color/white_dark"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/tvSelection"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

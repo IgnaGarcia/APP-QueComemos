@@ -44,10 +44,14 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
         sharedPref = SharedPreferencesManager(requireContext())
         initFoodViewModel()
 
+
+
         val lastUpdate = sharedPref.getLastUpdate()
+        val lastSelection = sharedPref.getSelection()
         if(lastUpdate != null && lastUpdate > (System.currentTimeMillis() - 21_600_000)
-            && sharedPref.getSelection() != null){
-            selection = sharedPref.getSelection()!!
+            && lastSelection != null && !lastSelection.vote.isNullOrEmpty()){
+            showList()
+            selection = lastSelection
             chargeFoodList(selection.vote)
         } else{
             getList()
@@ -66,7 +70,27 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
         }
     }
 
+    private fun showList(){
+        binding.rvFood.visibility = View.VISIBLE
+        binding.tvVoidList.visibility = View.GONE
+        binding.pbList.visibility = View.GONE
+    }
+
+    private fun hideList(){
+        binding.rvFood.visibility = View.GONE
+        binding.tvVoidList.visibility = View.GONE
+        binding.pbList.visibility = View.VISIBLE
+    }
+
+    private fun showError(msg: String){
+        binding.tvVoidList.text = msg
+        binding.tvVoidList.visibility = View.VISIBLE
+        binding.pbList.visibility = View.GONE
+        binding.rvFood.visibility = View.GONE
+    }
+
     private fun getList(){
+        hideList()
         val filter = sharedPref.getLastFilter()
         if(filter != null && filter.apply){
             foodViewModel.getList(null, filter.type, filter.culture, filter.isHot)
@@ -80,11 +104,16 @@ class FoodSelectionFragment : Fragment(R.layout.fragment_food_selection) {
 
         foodViewModel.obsList().observe(requireActivity(), {
             filterResult(it)
-            randomChoice()
-            chargeFoodList(it)
+            if(filtered.isEmpty()) showError(getString(R.string.voidFoods))
+            else {
+                randomChoice()
+                showList()
+                chargeFoodList(it)
+            }
         })
 
         foodViewModel.showError()?.observe(requireActivity(), {
+            showError(it)
             Log.e("GET FOOD LIST", it)
         })
     }

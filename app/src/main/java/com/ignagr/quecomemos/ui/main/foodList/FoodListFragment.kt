@@ -36,6 +36,7 @@ class FoodListFragment : Fragment(R.layout.fragment_food_list) {
         _binding = FragmentFoodListBinding.bind(view)
 
         initFoodViewModel()
+        hideList()
         foodViewModel.getList()
     }
 
@@ -43,15 +44,37 @@ class FoodListFragment : Fragment(R.layout.fragment_food_list) {
         foodViewModel = ViewModelProvider(this)[FoodViewModel::class.java]
 
         foodViewModel.obsList().observe(requireActivity(), {
-            chargeFoodList(it)
+            if(it.isNullOrEmpty()) showError(getString(R.string.voidFoods))
+            else chargeFoodList(it)
         })
 
         foodViewModel.showError()?.observe(requireActivity(), {
+            showError(it)
             Log.e("GET FOOD LIST", it)
         })
     }
 
+    private fun showList(){
+        binding.rvFood.visibility = View.VISIBLE
+        binding.tvVoidList.visibility = View.GONE
+        binding.pbList.visibility = View.GONE
+    }
+
+    private fun hideList(){
+        binding.rvFood.visibility = View.GONE
+        binding.tvVoidList.visibility = View.GONE
+        binding.pbList.visibility = View.VISIBLE
+    }
+
+    private fun showError(msg: String){
+        binding.tvVoidList.text = msg
+        binding.tvVoidList.visibility = View.VISIBLE
+        binding.pbList.visibility = View.GONE
+        binding.rvFood.visibility = View.GONE
+    }
+
     private fun chargeFoodList(list: List<Food>) {
+        showList()
         foodAdapter = FoodAdapter(list)
         binding.rvFood.adapter = foodAdapter
         binding.rvFood.layoutManager = LinearLayoutManager(

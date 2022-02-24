@@ -44,7 +44,11 @@ class NewFoodFragment : Fragment(R.layout.fragment_new_food) {
         foodViewModel.getEnums()
 
         binding.btnSend.setOnClickListener {
-            if(validInputs()) sendRequest()
+            if(validInputs()) {
+                binding.btnSend.visibility = View.GONE
+                binding.pbSend.visibility = View.VISIBLE
+                sendRequest()
+            }
         }
     }
 
@@ -53,10 +57,14 @@ class NewFoodFragment : Fragment(R.layout.fragment_new_food) {
 
         foodViewModel.obsNewFood().observe(requireActivity(), {
             Toast.makeText(requireContext(), "Comida creada!", Toast.LENGTH_SHORT).show()
+
+            binding.btnSend.visibility = View.VISIBLE
+            binding.pbSend.visibility = View.GONE
             // TODO clear fields
         })
 
         foodViewModel.obsEnums().observe(requireActivity(), {
+
             setUpSpinner(it.types, binding.spinnerType)
             (it.cultures as MutableList).add(0, "Otra")
             setUpSpinner(it.cultures, binding.spinnerCulture)
@@ -64,6 +72,8 @@ class NewFoodFragment : Fragment(R.layout.fragment_new_food) {
         })
 
         foodViewModel.showError()?.observe(requireActivity(), {
+            binding.btnSend.visibility = View.VISIBLE
+            binding.pbSend.visibility = View.GONE
             Log.e("NEW FOOD", it)
         })
     }
